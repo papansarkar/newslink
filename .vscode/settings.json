@@ -31,5 +31,11 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.biome": "explicit",
     "source.organizeImports.biome": "explicit"
-  }
+  },
+  "editor.tabSize": 2,
+  "cSpell.words": [
+    "mybettertapp",
+    "newslink",
+    "Unmuted"
+  ]
 }

@@ -2,7 +2,7 @@ name: newslink
 
 services:
   postgres:
-    image: postgres
+    image: postgres:17
     container_name: newslink-postgres
     environment:
       POSTGRES_DB: newslink

@@ -4,8 +4,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Inter", "Geist", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    "Inter", "Geist", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 html,
@@ -131,4 +132,76 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes slideRedFill {
+  0% {
+    width: 0%;
+    opacity: 0.4;
+  }
+  100% {
+    width: 100%;
+    opacity: 0.6;
+  }
+}
+
+.slide-red-fill {
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-red-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(248, 113, 113, 0.3); /* red-300 with opacity */
+  width: 0%;
+  animation: slideRedFill 0.5s forwards;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+@keyframes todo-complete-reveal {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes todo-uncomplete-peel {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+.todo-item-completed::before,
+.todo-item-completing::before,
+.todo-item-uncompleting::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: var(--color-muted);
+  opacity: 0.6;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.todo-item-completing::before {
+  transform-origin: left;
+  animation: todo-complete-reveal 0.5s ease-in-out;
+}
+
+.todo-item-uncompleting::before {
+  transform-origin: left;
+  animation: todo-uncomplete-peel 0.5s ease-in-out;
 }
