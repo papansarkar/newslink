@@ -215,7 +215,7 @@ function TodoItem({
         isCompleted && "todo-item-completed"
       )}
     >
-      <div className={clsx("relative z-[1] flex w-full flex-col gap-0")}>
+      <div className={clsx("relative z-1 flex w-full flex-col gap-0")}>
         {/* Top Row */}
         <div
           className={clsx("grid grid-cols-[auto_1fr_auto] items-center gap-3")}

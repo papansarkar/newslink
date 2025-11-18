@@ -35,7 +35,8 @@
     "@orpc/server": "catalog:",
     "better-auth": "catalog:",
     "@newslink/api": "workspace:*",
-    "@newslink/auth": "workspace:*"
+    "@newslink/auth": "workspace:*",
+    "@newslink/shared": "workspace:*"
   },
   "devDependencies": {
     "@tanstack/react-router-devtools": "^1.132.31",
