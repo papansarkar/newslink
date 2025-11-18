@@ -19,7 +19,8 @@
     "zod": "catalog:",
     "@newslink/api": "workspace:*",
     "@newslink/auth": "workspace:*",
-    "@newslink/db": "workspace:*"
+    "@newslink/db": "workspace:*",
+    "@newslink/shared": "workspace:*"
   },
   "devDependencies": {
     "typescript": "catalog:",
