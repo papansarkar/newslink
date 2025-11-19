@@ -65,11 +65,13 @@ newslink/
 ├── apps/
 │   ├── web/         # Frontend application (React + TanStack Start)
 │   ├── native/      # Mobile application (React Native, Expo)
-│   └── server/      # Backend API (Hono, ORPC)
+│   ├── server/      # Backend API (Hono, ORPC)
+│   └── admin/       # Admin application (React + TanStack Start)
 ├── packages/
 │   ├── api/         # API layer / business logic
 │   ├── auth/        # Authentication configuration & logic
-│   └── db/          # Database schema & queries
+│   ├── db/          # Database schema & queries
+│   └── shared/      # Shared code
 ```
 
 ## Available Scripts
