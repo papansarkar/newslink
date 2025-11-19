@@ -1,26 +1,26 @@
+import { cloudflare } from "@cloudflare/vite-plugin";
+import tailwindcss from "@tailwindcss/vite";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import viteReact from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { tanstackStart } from "@tanstack/react-start/plugin/vite";
-import tailwindcss from "@tailwindcss/vite";
-import viteReact from "@vitejs/plugin-react";
-import { cloudflare } from '@cloudflare/vite-plugin';
 
 export default defineConfig({
-	plugins: [
-		cloudflare({ 
-			viteEnvironment: { name: 'ssr' },
-			// miniflare: {
-			// 	inspectorPort: 9229
-			// }
-		}), 
-		tsconfigPaths(), 
-		tailwindcss(), 
-		tanstackStart(), 
-		viteReact()
-	],
-	server: {
-		port: 3001,
-		strictPort: true,
-		host: true,
-	},
+  plugins: [
+    cloudflare({
+      viteEnvironment: { name: "ssr" },
+      // miniflare: {
+      // 	inspectorPort: 9229
+      // }
+    }),
+    tsconfigPaths(),
+    tailwindcss(),
+    tanstackStart(),
+    viteReact(),
+  ],
+  server: {
+    port: 3001,
+    strictPort: true,
+    host: true,
+  },
 });

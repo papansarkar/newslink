@@ -17,4 +17,4 @@ export type Post = {
   title: string;
   content: string;
   authorId: string;
-}
+};

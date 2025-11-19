@@ -1,9 +1,9 @@
-const { getDefaultConfig } = require('expo/metro-config');
-const { withUniwindConfig } = require('uniwind/metro');
-const path = require('path');
+const { getDefaultConfig } = require("expo/metro-config");
+const { withUniwindConfig } = require("uniwind/metro");
+const path = require("path");
 
-const projectRoot = __dirname;
-const workspaceRoot = path.resolve(projectRoot, '../..');
+const projectRoot = import.meta.dirname;
+const workspaceRoot = path.resolve(projectRoot, "../..");
 
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(projectRoot);
@@ -13,8 +13,8 @@ config.watchFolders = [workspaceRoot];
 
 // #2. Let Metro know where to resolve packages and in what order
 config.resolver.nodeModulesPaths = [
-  path.resolve(projectRoot, 'node_modules'),
-  path.resolve(workspaceRoot, 'node_modules'),
+  path.resolve(projectRoot, "node_modules"),
+  path.resolve(workspaceRoot, "node_modules"),
 ];
 
 // #3. Force Metro to pick React Native even if other versions exist
@@ -22,9 +22,8 @@ config.resolver.disableHierarchicalLookup = true;
 
 // #4. Apply Uniwind configuration
 const uniwindConfig = withUniwindConfig(config, {
-	cssEntryFile: './global.css',
-	dtsFile: './uniwind-types.d.ts',
+  cssEntryFile: "./global.css",
+  dtsFile: "./uniwind-types.d.ts",
 });
 
 module.exports = uniwindConfig;
-
