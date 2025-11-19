@@ -12,8 +12,10 @@ export const auth = betterAuth<BetterAuthOptions>({
   }),
   trustedOrigins: [
     ...(process.env.CORS_ORIGIN?.split(",").map((o) => o.trim()) || []),
-    "mybettertapp://",
-    "exp://",
+    "exp://172.20.94.137:8081",
+    "exp://127.0.0.1:19000",
+    "newslink://",
+
   ],
   emailAndPassword: {
     enabled: true,

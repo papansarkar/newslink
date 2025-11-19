@@ -14,6 +14,10 @@ import { logger } from "hono/logger";
 const app = new Hono();
 
 app.use(logger());
+app.use(async (c, next) => {
+  console.log("Request Origin:", c.req.header("Origin"));
+  await next();
+});
 app.use(
   "/*",
   cors({

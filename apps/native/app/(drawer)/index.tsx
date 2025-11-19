@@ -20,6 +20,8 @@ export default function Home() {
   const dangerColor = useThemeColor("danger");
   const foregroundColor = useThemeColor("foreground");
 
+  const isConnectedApi = isConnected ? "Connected to API" : "API Disconnected";
+
   return (
     <Container className="p-6">
       <View className="mb-6 py-4">
@@ -30,19 +32,24 @@ export default function Home() {
 
       {session?.user ? (
         <Card className="mb-6 p-4" variant="secondary">
-          <Text className="mb-2 text-base text-foreground">
-            Welcome, <Text className="font-medium">{session.user.name}</Text>
-          </Text>
-          <Text className="mb-4 text-muted text-sm">{session.user.email}</Text>
-          <Pressable
-            className="self-start rounded-lg bg-danger px-4 py-3 active:opacity-70"
-            onPress={() => {
-              authClient.signOut();
-              queryClient.invalidateQueries();
-            }}
-          >
-            <Text className="font-medium text-foreground">Sign Out</Text>
-          </Pressable>
+          <View className="flex flex-row items-center justify-between">
+            <View className="flex flex-col">
+              <Text className="mb-1 text-base text-foreground">
+                Welcome,{" "}
+                <Text className="font-medium">{session.user.name}</Text>
+              </Text>
+              <Text className="text-muted text-sm">{session.user.email}</Text>
+            </View>
+            <Pressable
+              className="rounded-lg bg-danger px-4 py-3 active:opacity-70"
+              onPress={() => {
+                authClient.signOut();
+                queryClient.invalidateQueries();
+              }}
+            >
+              <Text className="font-medium text-foreground">Sign Out</Text>
+            </Pressable>
+          </View>
         </Card>
       ) : null}
 
@@ -54,7 +61,9 @@ export default function Home() {
             size="sm"
             variant="secondary"
           >
-            <Chip.Label>{isConnected ? "LIVE" : "OFFLINE"}</Chip.Label>
+            <Chip.Label className="px-1">
+              {isConnected ? "LIVE" : "OFFLINE"}
+            </Chip.Label>
           </Chip>
         </View>
 
@@ -68,11 +77,7 @@ export default function Home() {
                 ORPC Backend
               </Text>
               <Card.Description>
-                {isLoading
-                  ? "Checking connection..."
-                  : isConnected
-                    ? "Connected to API"
-                    : "API Disconnected"}
+                {isLoading ? "Checking connection..." : isConnectedApi}
               </Card.Description>
             </View>
             {isLoading && (

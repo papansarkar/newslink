@@ -80,7 +80,7 @@ export default function TodosScreen() {
             </Text>
             {totalCount > 0 && (
               <Chip color="accent" size="sm" variant="secondary">
-                <Chip.Label>
+                <Chip.Label className="px-1">
                   {completedCount}/{totalCount}
                 </Chip.Label>
               </Chip>
@@ -154,6 +154,7 @@ export default function TodosScreen() {
               <Card className="p-4" key={todo.id} variant="secondary">
                 <View className="flex-row items-center gap-3">
                   <Checkbox
+                    className="rounded-full bg-gray-300"
                     isSelected={todo.completed}
                     onSelectedChange={() =>
                       handleToggleTodo(todo.id, todo.completed)

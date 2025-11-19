@@ -33,8 +33,8 @@ const getORPCClient = createIsomorphicFn()
   .client((): RouterClient<typeof appRouter> => {
     const link = new RPCLink({
       url: `${import.meta.env.VITE_SERVER_URL}/rpc`,
-      fetch(url, options) {
-        return fetch(url, {
+      fetch(_url, options) {
+        return fetch(_url, {
           ...options,
           credentials: "include",
         });

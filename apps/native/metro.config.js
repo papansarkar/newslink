@@ -1,8 +1,10 @@
+/** biome-ignore-all lint/correctness/noGlobalDirnameFilename: <> */
+/** biome-ignore-all lint/style/useNodejsImportProtocol: <> */
 const { getDefaultConfig } = require("expo/metro-config");
 const { withUniwindConfig } = require("uniwind/metro");
 const path = require("path");
 
-const projectRoot = import.meta.dirname;
+const projectRoot = __dirname;
 const workspaceRoot = path.resolve(projectRoot, "../..");
 
 /** @type {import('expo/metro-config').MetroConfig} */
