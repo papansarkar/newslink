@@ -8,6 +8,57 @@ import { SignUp } from "@/components/sign-up";
 import { authClient } from "@/lib/auth-client";
 import { orpc, queryClient } from "@/utils/orpc";
 
+function StatusChip({
+  isLoading,
+  isConnected,
+  successColor,
+  dangerColor,
+}: {
+  isLoading: boolean;
+  isConnected: boolean;
+  successColor: string;
+  dangerColor: string;
+}) {
+  return (
+    <Chip
+      className={`gap-1 px-1 ${isConnected ? "border-success text-success" : "border-danger text-danger"} `}
+      color={isConnected ? "success" : "danger"}
+      size="sm"
+      variant="secondary"
+    >
+      {!isLoading && isConnected && (
+        <Ionicons color={successColor} name="checkmark-circle" size={20} />
+      )}
+      {!(isLoading || isConnected) && (
+        <Ionicons color={dangerColor} name="close-circle" size={20} />
+      )}
+      <Chip.Label>{isConnected ? "LIVE" : "OFFLINE"}</Chip.Label>
+    </Chip>
+  );
+}
+
+function StatusIcon({
+  isLoading,
+  isConnected,
+  mutedColor,
+  successColor,
+  dangerColor,
+}: {
+  isLoading: boolean;
+  isConnected: boolean;
+  mutedColor: string;
+  successColor: string;
+  dangerColor: string;
+}) {
+  if (isLoading) {
+    return <Ionicons color={mutedColor} name="hourglass-outline" size={20} />;
+  }
+  if (isConnected) {
+    return <Ionicons color={successColor} name="checkmark-circle" size={20} />;
+  }
+  return <Ionicons color={dangerColor} name="close-circle" size={20} />;
+}
+
 export default function Home() {
   const healthCheck = useQuery(orpc.healthCheck.queryOptions());
   const privateData = useQuery(orpc.privateData.queryOptions());
@@ -18,7 +69,6 @@ export default function Home() {
   const mutedColor = useThemeColor("muted");
   const successColor = useThemeColor("success");
   const dangerColor = useThemeColor("danger");
-  const foregroundColor = useThemeColor("foreground");
 
   const isConnectedApi = isConnected ? "Connected to API" : "API Disconnected";
 
@@ -56,18 +106,15 @@ export default function Home() {
       <Card className="p-6" variant="secondary">
         <View className="mb-4 flex-row items-center justify-between">
           <Card.Title>System Status</Card.Title>
-          <Chip
-            color={isConnected ? "success" : "danger"}
-            size="sm"
-            variant="secondary"
-          >
-            <Chip.Label className="px-1">
-              {isConnected ? "LIVE" : "OFFLINE"}
-            </Chip.Label>
-          </Chip>
+          <StatusChip
+            dangerColor={dangerColor}
+            isConnected={isConnected}
+            isLoading={isLoading}
+            successColor={successColor}
+          />
         </View>
 
-        <Card className="p-4">
+        <Card className="rounded p-4">
           <View className="flex-row items-center">
             <View
               className={`mr-3 h-3 w-3 rounded-full ${isConnected ? "bg-success" : "bg-muted"}`}
@@ -80,19 +127,13 @@ export default function Home() {
                 {isLoading ? "Checking connection..." : isConnectedApi}
               </Card.Description>
             </View>
-            {isLoading && (
-              <Ionicons color={mutedColor} name="hourglass-outline" size={20} />
-            )}
-            {!isLoading && isConnected && (
-              <Ionicons
-                color={successColor}
-                name="checkmark-circle"
-                size={20}
-              />
-            )}
-            {!(isLoading || isConnected) && (
-              <Ionicons color={dangerColor} name="close-circle" size={20} />
-            )}
+            <StatusIcon
+              dangerColor={dangerColor}
+              isConnected={isConnected}
+              isLoading={isLoading}
+              mutedColor={mutedColor}
+              successColor={successColor}
+            />
           </View>
         </Card>
       </Card>

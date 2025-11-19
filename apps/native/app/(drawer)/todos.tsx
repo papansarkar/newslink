@@ -79,8 +79,13 @@ export default function TodosScreen() {
               Todo List
             </Text>
             {totalCount > 0 && (
-              <Chip color="accent" size="sm" variant="secondary">
-                <Chip.Label className="px-1">
+              <Chip
+                className="dark:bg-zinc-800"
+                color="accent"
+                size="sm"
+                variant="secondary"
+              >
+                <Chip.Label className="px-1 dark:text-zinc-300">
                   {completedCount}/{totalCount}
                 </Chip.Label>
               </Chip>
@@ -92,7 +97,7 @@ export default function TodosScreen() {
           <View className="flex-row items-center gap-3">
             <View className="flex-1">
               <TextInput
-                className="rounded-lg border border-divider bg-surface px-4 py-3 text-base text-foreground"
+                className="rounded-lg border-divider border-none bg-surface px-4 py-3 text-base text-foreground"
                 editable={!createMutation.isPending}
                 onChangeText={setNewTodoText}
                 onSubmitEditing={handleAddTodo}
@@ -103,7 +108,7 @@ export default function TodosScreen() {
               />
             </View>
             <Pressable
-              className={`rounded-lg p-3 active:opacity-70 ${createMutation.isPending || !newTodoText.trim() ? "bg-surface" : "bg-accent"}`}
+              className={`rounded-lg p-2 active:opacity-70 ${createMutation.isPending || !newTodoText.trim() ? "bg-surface" : "bg-accent"}`}
               disabled={createMutation.isPending || !newTodoText.trim()}
               onPress={handleAddTodo}
             >
@@ -151,7 +156,11 @@ export default function TodosScreen() {
         {todos?.data && todos.data.length > 0 && (
           <View className="gap-3">
             {todos.data.map((todo) => (
-              <Card className="p-4" key={todo.id} variant="secondary">
+              <Card
+                className="rounded bg-accent-foreground p-4 dark:bg-zinc-800"
+                key={todo.id}
+                variant="secondary"
+              >
                 <View className="flex-row items-center gap-3">
                   <Checkbox
                     className="rounded-full bg-gray-300"
