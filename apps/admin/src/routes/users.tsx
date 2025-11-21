@@ -15,7 +15,7 @@ export const Route = createFileRoute("/users")({
         to: "/login",
       });
     }
-    if (context.session.user.role !== "ADMIN") {
+    if (context.session.user.role !== "admin") {
       toast.error("You do not have permission to access this page.");
       throw redirect({
         to: "/dashboard",

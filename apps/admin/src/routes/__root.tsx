@@ -55,7 +55,7 @@ function RootDocument() {
           <Header />
           <Outlet />
         </div>
-        <Toaster position="bottom-center" richColors />
+        <Toaster position="top-center" richColors />
         <TanStackRouterDevtools position="bottom-left" />
         <ReactQueryDevtools buttonPosition="bottom-right" position="bottom" />
         <Scripts />

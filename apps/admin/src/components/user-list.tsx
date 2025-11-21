@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
 import {
   Ban,
   CheckCircle,
@@ -28,6 +29,7 @@ import {
 
 export default function UserList() {
   const queryClient = useQueryClient();
+  const session = authClient.useSession();
 
   const {
     data: users,
@@ -174,7 +176,13 @@ export default function UserList() {
                   </td>
                   <td className="p-4 text-right align-middle">
                     <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
+                      <DropdownMenuTrigger
+                        asChild
+                        className={clsx(
+                          user.role === "admin" ? "bg-zinc-900" : ""
+                        )}
+                        disabled={user.id === session.data?.session.userId}
+                      >
                         <Button className="h-8 w-8 p-0" variant="ghost">
                           <span className="sr-only">Open menu</span>
                           <MoreHorizontal className="h-4 w-4" />
@@ -190,7 +198,10 @@ export default function UserList() {
                         <DropdownMenuSeparator />
                         <DropdownMenuLabel>Role Management</DropdownMenuLabel>
                         <DropdownMenuItem
-                          disabled={user.role === "admin"}
+                          disabled={
+                            user.role === "admin" ||
+                            user.id === session.data?.session.userId
+                          }
                           onClick={() =>
                             setRoleMutation.mutate({
                               userId: user.id,

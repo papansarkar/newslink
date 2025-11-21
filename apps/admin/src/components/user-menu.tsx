@@ -1,4 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
+import clsx from "clsx";
+import { Shield, ShieldCheck } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,7 +32,19 @@ export default function UserMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">{session.user.name}</Button>
+        <Button
+          className={clsx(
+            session.user.role === "admin" ? "bg-red-400" : "bg-green-400"
+          )}
+          variant="outline"
+        >
+          {session.user.role === "admin" ? (
+            <ShieldCheck className="h-4 w-4 text-red-600" />
+          ) : (
+            <Shield className="h-4 w-4 text-muted-foreground" />
+          )}
+          {session.user.name}
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-card">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>

@@ -23,7 +23,6 @@ export default function SignUpForm({
       email: "",
       password: "",
       name: "",
-      role: "user",
     },
     onSubmit: async ({ value }) => {
       await authClient.signUp.email(
@@ -31,7 +30,6 @@ export default function SignUpForm({
           email: value.email,
           password: value.password,
           name: value.name,
-          role: value.role,
         },
         {
           onSuccess: () => {
@@ -51,7 +49,6 @@ export default function SignUpForm({
         name: z.string().min(2, "Name must be at least 2 characters"),
         email: z.email("Invalid email address"),
         password: z.string().min(8, "Password must be at least 8 characters"),
-        role: z.enum(["user", "admin"]),
       }),
     },
   });
@@ -130,34 +127,6 @@ export default function SignUpForm({
                   type="password"
                   value={field.state.value}
                 />
-                {field.state.meta.errors.map((error) => (
-                  <p className="text-red-500" key={error?.message}>
-                    {error?.message}
-                  </p>
-                ))}
-              </div>
-            )}
-          </form.Field>
-        </div>
-
-        <div>
-          <form.Field name="role">
-            {(field) => (
-              <div className="space-y-2">
-                <Label htmlFor={field.name}>Role</Label>
-                <div className="relative">
-                  <select
-                    className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                    id={field.name}
-                    name={field.name}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    value={field.state.value}
-                  >
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                </div>
                 {field.state.meta.errors.map((error) => (
                   <p className="text-red-500" key={error?.message}>
                     {error?.message}
