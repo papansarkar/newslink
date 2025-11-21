@@ -4,6 +4,7 @@ import { db } from "@newslink/db";
 import * as schema from "@newslink/db/schema/auth";
 import { type BetterAuthOptions, betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { admin } from "better-auth/plugins";
 
 export const auth = betterAuth<BetterAuthOptions>({
   database: drizzleAdapter(db, {
@@ -15,7 +16,6 @@ export const auth = betterAuth<BetterAuthOptions>({
     "exp://172.20.94.137:8081",
     "exp://127.0.0.1:19000",
     "newslink://",
-
   ],
   emailAndPassword: {
     enabled: true,
@@ -27,5 +27,20 @@ export const auth = betterAuth<BetterAuthOptions>({
       httpOnly: true,
     },
   },
-  plugins: [expo()],
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        required: true,
+        input: true,
+        defaultValue: "user",
+      },
+    },
+  },
+
+  plugins: [expo(), admin()],
 });
+
+export type ErrorCode = keyof typeof auth.$ERROR_CODES | "UNKNOWN";
+
+export type authType = typeof auth;
